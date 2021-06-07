@@ -1,7 +1,7 @@
 ---
 title: "Alcohol vs Seat choice"
-author: "Your Name"
-date: "Fall 2020"
+author: "Taylor Stohl"
+date: "Summer 2021"
 output: html_document
 ---
 
@@ -14,8 +14,8 @@ require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
-## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
-## you choose to sit in??
+Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
+you choose to sit in??
 
 ## Now with ggplot - first select the basic data
 
@@ -35,9 +35,25 @@ basicCN + geom_boxplot()
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
+This boxplot shows  that those who sit in the back drink substantially more than those who sit in the middle and front. Over 75% of people who sit in the back drink more than anyone sitting in the middle and front.
+
+
+
+
 ## Numerical Summarys 
 
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+
+It appears that students sitting in the back of the class consumed a mean of 9.625 ounces of alcohol a week. Furthermore, people who sit in the back of the class, drink about three times more alcohol than people who sit in the middle and the front of the class. The null hypothesis is rejected, as it is clear there is an evident correlation between alcohol consumption and seat position in class.
+
+
 ## Inferential Tests
+
+
+
+
 
 ## Conclusions
 

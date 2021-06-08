@@ -46,11 +46,27 @@ This boxplot shows  that those who sit in the back drink substantially more than
 favstats(alcohol~Seat,data=davisdata)
 ```
 
-It appears that students sitting in the back of the class consumed a mean of 9.625 ounces of alcohol a week. Furthermore, people who sit in the back of the class, drink about three times more alcohol than people who sit in the middle and the front of the class. The null hypothesis is rejected, as it is clear there is an evident correlation between alcohol consumption and seat position in class.
-
+It appears that students sitting in the back of the class consumed a mean of 9.625 ounces of alcohol a week. Furthermore, people who sit in the back of the class, drink about three times more alcohol than people who sit in the middle and the front of the class. 
 
 ## Inferential Tests
 
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+The P-value is so small (0.000116), that it is unlikely the alcohol consumption is the same in all 3 seat positions. The null hypothesis is rejected; they do not drink the same amount.
+
+
+
+## When significant follow up with TukeyHSD  
+
+```{r}
+plot(TukeyHSD(model1))
+```
+This TukeyHDS plot shows that those who sit in the back drink significantly more than those in the front.
+This plot also shows that those in the back seats drink a much larger quantity of alcohol than those seated in the middle. However, it shows no difference in alcohol consumption between the middle and the front.
+If zero is in the confidence interval that means there is no difference.
+(The confidence interval is the dotted line above zero)
 
 
 

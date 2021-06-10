@@ -29,13 +29,15 @@ basicCN + geom_boxplot()
 ```
   
   
+  This boxplot displays three different seating positions; front, middle and back. The box representing those who sit in the back has an evident difference in value, as the box is positioned much higher up than the middle and front boxes.
+  
 ### get fancy  
 
 ```{r}
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
-This boxplot shows  that those who sit in the back drink substantially more than those who sit in the middle and front. Over 75% of people who sit in the back drink more than anyone sitting in the middle and front.
+This boxplot shows  that those who sit in the back drink substantially more than those who sit in the middle and front. About 75% of all the people who sit in the back drink more than those sitting in the middle and front. The middle and front show little difference.
 
 
 
@@ -46,7 +48,7 @@ This boxplot shows  that those who sit in the back drink substantially more than
 favstats(alcohol~Seat,data=davisdata)
 ```
 
-It appears that students sitting in the back of the class consumed a mean of 9.625 ounces of alcohol a week. Furthermore, people who sit in the back of the class, drink about three times more alcohol than people who sit in the middle and the front of the class. 
+It appears that students sitting in the back of the class consumed a mean of 9.6 ounces of alcohol a week. Students in the middle drink on average 3.2 and those in the front drink 1.8. Furthermore, people who sit in the back of the class, drink about three times more alcohol than people who sit in the middle and the front of the class. 
 
 ## Inferential Tests
 
@@ -54,7 +56,7 @@ It appears that students sitting in the back of the class consumed a mean of 9.6
 model1 <- aov(alcohol~Seat,data=davisdata)
 summary.aov(model1)
 ```
-The P-value is so small (0.000116), that it is unlikely the alcohol consumption is the same in all 3 seat positions. The null hypothesis is rejected; they do not drink the same amount.
+The P-value is so small (0.000116), that it is unlikely the alcohol consumption is the same in all 3 seat positions. This number is too small to believe that it happened by chance. The null hypothesis is rejected; not all seating positions drink the same amount. We will seek clarification of which rows had differing values.
 
 
 
@@ -66,14 +68,13 @@ plot(TukeyHSD(model1))
 
 
 This TukeyHDS plot shows that those who sit in the back drink significantly more than those in the front.
-This plot also shows that those in the back seats drink a much larger quantity of alcohol than those seated in the middle. However, it shows no difference in alcohol consumption between the middle and the front.
-If zero is in the confidence interval that means there is no difference.
-(The confidence interval is the dotted line above zero.)
+This plot also shows that those in the back seats drink a much larger quantity of alcohol than those seated in the middle. However, it shows no difference in alcohol consumption between the middle and the front. The confidence interval passing through Middle-Front is an indication that these two positions aren't different in value.
+
 
 
 
 
 ## Conclusions
 
-There is a difference in alcohol consumption and seat position. Those who sit in back drink approximately three times more than those who sit in the middle and front. There isn't a difference in consumption of alcohol between the middle and front.
+There is a difference in alcohol consumption and seat position.  Because the categorical variable has more than 2 levels, an anova is used instead of a t-test. The anova showed there is a difference in alcohol consumption and seat locations. The Tukey HDS showed that the differences were that those who sit in back drink approximately three times more than those who sit in the middle and front. There isn't a difference in consumption of alcohol between the middle and front. 
 
